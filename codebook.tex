@@ -5,8 +5,8 @@
 % - 編譯：建議使用 xelatex (需支援 fontspec / xeCJK)。
 % - 可調整項目：行號 (listings)、字型、是否加入更多章節。
 % =============================================================
-\documentclass[a4paper,10pt,twocolumn,oneside]{article}
-\setlength{\columnsep}{10pt}                                                              %兩欄模式的間距
+\documentclass[a4paper,8pt,twocolumn,oneside]{article}
+\setlength{\columnsep}{5pt}                                                              %兩欄模式的間距
 \setlength{\columnseprule}{0pt}                                                                %兩欄模式間格線粗細
 
 \usepackage{amsthm}								%定義，例題
@@ -27,21 +27,23 @@
 \usepackage[CheckSingle, CJKmath]{xeCJK}
 % \usepackage{CJKulem}
 %\usepackage[T1]{fontenc}
-\titlespacing{\section}{0cm}{0cm}{0cm}
-\titlespacing{\subsection}{0cm}{0cm}{0cm}
+\titlespacing{\section}{0cm}{2pt}{1pt}
+\titlespacing{\subsection}{0cm}{2pt}{1pt}
+\titleformat{\section}{\small\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\small\bfseries}{\thesubsection}{0.5em}{}
 \usepackage{amsmath, courier, listings, fancyhdr, graphicx}
-\topmargin=0pt
-\headsep=5pt
-\textheight=780pt
-\footskip=0pt
+\topmargin=-20pt
+\headsep=10pt
+\textheight=800pt
+\footskip=5pt
 \voffset=-40pt
 \textwidth=545pt
 \marginparsep=0pt
 \marginparwidth=0pt
 \marginparpush=0pt
-\oddsidemargin=0pt
-\evensidemargin=0pt
-\hoffset=-42pt
+\oddsidemargin=-5pt
+\evensidemargin=-5pt
+\hoffset=-40pt
 
 %\renewcommand\listfigurename{圖目錄}
 %\renewcommand\listtablename{表目錄} 
@@ -64,9 +66,7 @@
 \setCJKmainfont[
   Path = .fonts/ttf/,        % 你放字型檔的資料夾（相對於主 .tex 檔案）
   Extension = .ttf,
-  UprightFont = *-Regular,
-  BoldFont = *-Bold,
-]{NotoSansTC}
+]{NotoSansCJKtc-VF}
 
 \XeTeXlinebreaklocale "zh"						%中文自動換行
 \XeTeXlinebreakskip = 0pt plus 1pt				%設定段落之間的距離
@@ -79,11 +79,11 @@
 \makeatother
 \lstset{											% Code顯示
 language=C++,										% the language of the code
-basicstyle=\footnotesize\ttfamily, 						% the size of the fonts that are used for the code
+basicstyle=\tiny\ttfamily, 						% the size of the fonts that are used for the code
 %numbers=left,										% where to put the line-numbers
-numberstyle=\footnotesize,						% the size of the fonts that are used for the line-numbers
+numberstyle=\tiny,						% the size of the fonts that are used for the line-numbers
 stepnumber=1,										% the step between two line-numbers. If it's 1, each line  will be numbered
-numbersep=5pt,										% how far the line-numbers are from the code
+numbersep=2pt,										% how far the line-numbers are from the code
 backgroundcolor=\color{white},					% choose the background color. You must add \usepackage{color}
 showspaces=false,									% show spaces adding particular underscores
 showstringspaces=false,							% underline spaces within strings
@@ -98,6 +98,9 @@ morekeywords={*},									% if you want to add more keywords to the set
 keywordstyle=\bfseries\color{Blue1},
 commentstyle=\itshape\color{Red4},
 stringstyle=\itshape\color{Green4},
+aboveskip=5pt,
+belowskip=3pt,
+lineskip=0pt,
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -106,8 +109,9 @@ stringstyle=\itshape\color{Green4},
 \pagestyle{fancy}
 \fancyfoot{}
 %\fancyfoot[R]{\includegraphics[width=20pt]{ironwood.jpg}}
-\fancyhead[L]{Jackis666}
-\fancyhead[R]{\thepage}
+\fancyhead[L]{\small it\_is\_time\_to\_ac}
+\fancyhead[C]{\small where is my bed}
+\fancyhead[R]{\small \thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\contentsname}{Contents} 
 
@@ -117,93 +121,108 @@ stringstyle=\itshape\color{Green4},
   \vspace{-1.2em}
 }
 \scriptsize
-\tableofcontents
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{0pt}
+\setlength{\topsep}{0pt}
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
 
 
 % \newpage
 %sectionstart  % ===== 以下依分類匯入各程式碼檔案 =====
 
-\section{Basic}
-    \subsection{default}
+    \subsection*{default}
     \lstinputlisting{basic/default.cpp}
 
-    \subsection{奇妙的東西}
-    \lstinputlisting{basic/coolthings.cpp}
-
-    \subsection{random}
-    \lstinputlisting{basic/random.cpp}
-
-%====================================================
-
-\section{Math}
-  \subsection{basic}
-  \lstinputlisting{math/basic}
-
-  \subsection{快速幂}
+  \subsection*{ksm}
   \lstinputlisting{math/pow.cpp}
 
-  \subsection{大數運算}
-  \lstinputlisting{math/bigmath.cpp}
-
-  \subsection{極座標排序}
-  \lstinputlisting{math/sort_of_point.cpp}
-
-  \includetex{Theorem}{math/theorem}
-  \vspace{1.2em}
-
-  \includetex{Prime}{math/prime.tex}
-  \vspace{1.2em}
-
-%====================================================
-
-\section{Binary Search}
-    \subsection{二分搜}
-    \lstinputlisting{binary search/binary search.cpp}
-
-    \subsection{三分搜}
-    \lstinputlisting{binary search/tenary search.cpp}
-
-%====================================================
-
-\section{DataStructure}
-    \subsection{DSU(並查集)}
-    \lstinputlisting{datastructure/dsu.cpp}
+    \subsection*{shortest paths}
+    \lstinputlisting{graph/shortest_path.cpp}
     
-    \subsection{FenwickTree/BIT}
-    \lstinputlisting{datastructure/BIT.cpp}
+    \subsection*{topological sort}
+    \lstinputlisting{graph/topo_sort_detailed.cpp}
 
-    \subsection{Seg}
-    \lstinputlisting{datastructure/Seg.cpp}
+    \subsection*{BIT}
+    \lstinputlisting{cheat/BIT.cpp}
 
-%====================================================
+    \subsection*{Big Cheat}
+    \lstinputlisting{cheat/BIG_CHEAT.cpp}
 
-\section{Graph}
-    \subsection{Topo/拓樸}
-    \lstinputlisting{graph/topo.cpp}
-
-
-%====================================================
-
-\newcommand{\halfgridpage}{
-    \begin{tikzpicture}[every node/.style={minimum size=1cm-\pgflinewidth, outer sep=10pt}, scale=2]
-        \draw[step=0.2cm,color=gray] (0,0) grid (4,13);
-        \draw[step=1cm,color=black,line width=0.4mm] (0,0) grid (4,13);
-    \end{tikzpicture}
-    \newpage
+    \subsection*{Short path question}
+    \lstinputlisting{cheat/Short_path_question.cpp}
+    
+    \subsection*{graph}
+    \begin{lstlisting}
+// Topological Sort - 基礎版本
+void solve(){
+int n, m; cin >> n >> m;
+vector<int> edge[m + 5];
+vector<int> deg(n + 5, 0);
+vector<int> ans;
+for(int i = 1; i <= m; i++) {
+  int u, v; cin >> u >> v;
+  edge[u].push_back(v);
+  deg[v]++;
 }
+queue<int> que;
+for(int i = 1; i <= n; i++)
+  if(deg[i] == 0) que.push(i);
+while (!que.empty()) {
+  int u = que.front(); que.pop();
+  ans.push_back(u);
+  for (int i : edge[u]) {
+    deg[i]--;
+    if (!deg[i]) que.push(i);
+  }
+}
+if(ans.size() != n) cout << "IMPOSSIBLE";
+else for(int i = 0; i < n; i++) cout << ans[i] << " \n"[i == n];
+}
+// Topological Sort - DP版本 (計數路徑)
+void solve_dp(){
+int n, m; cin >> n >> m;
+vector<int> edge[n + 5];
+vector<int> deg(n + 5, 0);
+vector<long long> dp(n + 5, 0);
+for(int i = 0; i < m; i++) {
+  int u, v; cin >> u >> v;
+  edge[u].push_back(v);
+  deg[v]++;
+}
+dp[1] = 1;
+queue<int> q;
+for (int i = 1; i <= n; i++)
+  if (deg[i] == 0) q.push(i);
+while (!q.empty()) {
+  int u = q.front(); q.pop();
+  for (int i : edge[u]) {
+    dp[u] %= (int)1e9 + 7;
+    dp[i] = dp[i] + dp[u];
+    dp[i] %= (int)1e9 + 7;
+    deg[i]--;
+    if (deg[i] == 0) q.push(i);
+  }
+}
+dp[n] %= (int)1e9 + 7;
+cout << dp[n];
+}
+    \end{lstlisting}
+    
+    \subsection*{codeforce}
+    \lstinputlisting{cheat/BIG_CHEAT.cpp}
+    
+    \includegraphics[width=1\columnwidth]{intro2.jpg}
+
 \newcommand{\gridpage}{
     \centering
-\begin{tikzpicture}[every node/.style={minimum size=1cm-\pgflinewidth, outer sep=10pt}, scale=2]
-    \draw[step=0.2cm,color=gray] (0,0) grid (9,12);
-    \draw[step=1cm,color=black,line width=0.4mm] (0,0) grid (9,12);
-\end{tikzpicture}
-    \newpage
+    \begin{tikzpicture}[every node/.style={minimum size=1cm-\pgflinewidth, outer sep=10pt}, scale=2]
+        \draw[step=0.2cm,color=gray] (0,0) grid (9,12);
+        \draw[step=1cm,color=black,line width=0.4mm] (0,0) grid (9,12);
+    \end{tikzpicture}
 }
-\onecolumn
-\gridpage
-\gridpage
-\gridpage
-\gridpage
 
+\newpage
+\gridpage
 
 \end{document}

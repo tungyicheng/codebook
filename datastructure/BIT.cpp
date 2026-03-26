@@ -1,28 +1,23 @@
-struct Fenwick {//這個是1base的
+struct Binary_Indexed_Tree{
     int n;
-    vector<int> s;
-    int lowbit(int x) { return x & -x; }
-    Fenwick(int _n) {
-        n = _n + 1;
-        s.clear(), s.resize(n, 0);
+    vector<long long> bit;
+    int lowbit(int x){
+        return x&-x;
     }
-    void update(int i, int v) {  // 更新數值
-        for (; i < n; i += lowbit(i))
-            s[i] += v;
+    void init(int _n){
+        n = _n+1;
+        bit = vector<long long>(n,0);
     }
-    int query(int x) {  // 查詢前綴和(有包含)
-        int pre = 0;
-        for (; x; x -= lowbit(x))
-            pre += s[x];
-        return pre;
+    void update(int x,int v){
+        for(; x<n; x+=lowbit(x)){
+            bit[x] += v;
+        }
     }
-    Fenwick(vector<int> a) {// 建構資料結構
-        n = a.size(); // a 是 0-based
-        s.clear(), s.resize(n + 1, 0); // s 是 1-based
-        for (int i = 1; i <= n; i++)
-            update(i, a[i - 1]);
+    long long query(int x){
+        long long ret = 0;
+        for(; x>0; x-=lowbit(x)){
+            ret += bit[x];
+        }
+        return ret;
     }
-};
-//使用:
-Fenwick fw(a);//a is vector
-Fenwick fw(n);//n is int
+}BIT;
